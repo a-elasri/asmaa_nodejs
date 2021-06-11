@@ -1,4 +1,3 @@
-
 var express = require('express');
 var router = express.Router();
 const usersRepo = require('../repositories/users')
@@ -21,6 +20,7 @@ router.delete('/:id',async function(req,res,next){
   }else{
     res.status(403).json({ message: 'unauthorised access!' })
   }
+  
 })
 
 router.put('/',async function(req,res,next){
