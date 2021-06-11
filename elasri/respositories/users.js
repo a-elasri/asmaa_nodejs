@@ -9,7 +9,7 @@ module.exports = {
         return User.findAndCountAll({
             limit: limit,
             offset: offset,
-            order:[ ['createdAt', 'DESC'] ], 
+            order:[ ['createdAt', 'DESC'] ], // conditions
           })
     },
     getAdmins() { 
