@@ -2,7 +2,7 @@
 var faker = require('faker');
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-     var data = [];
+  /*   var data = [];
 
      for(var i=0; i<20; ++i) 
      {
@@ -25,7 +25,7 @@ module.exports = {
      
      }
      
-     await queryInterface.bulkInsert('Users', data, {});
+     await queryInterface.bulkInsert('Users', data, {});*/
   },
 
   down: async (queryInterface, Sequelize) => {
