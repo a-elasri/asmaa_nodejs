@@ -10,11 +10,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Tag.belongsToMany(models.Article, {through: 'ArticleTags'})
     }
   };
   Tag.init({
-    name: DataTypes.STRING
+    name: {
+      type:DataTypes.STRING,
+      unique:true
+    }
   }, {
     sequelize,
     modelName: 'Tag',
