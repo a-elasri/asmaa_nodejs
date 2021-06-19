@@ -12,40 +12,31 @@ router.get('/', async function(req, res, next) {
 });
 
 router.delete('/:id',async function(req,res,next){
-  const { role } = req.user;
-  if(role == "admin" || role == "author"){
-    const id = req.params.id
+
+      const id = req.params.id
     await usersRepo.deleteUser(id)
     res.send({id})
-  }else{
-    res.status(403).json({ message: 'unauthorised access!' })
-  }
+ 
   
 })
 
 router.put('/',async function(req,res,next){
-  const { role } = req.user;
-  if(role == "admin" || role == "author"){
-    const user = req.body
+
+  const user = req.body
   res.send(await usersRepo.updateUser(user))
-  }else{
-    res.status(403).json({ message: 'unauthorised access!' })
-  }
+
 })
 
 router.post('/',async function(req,res,next){
-  const { role } = req.user;
-  if(role == "admin" || role == "author"){
-    const user = req.body
+  
+  const user = req.body
     const retrievedUser = await usersRepo.getUserByEmail(user.email) 
     if(!retrievedUser){
       res.send(await usersRepo.addUser(user))
     }else{
       res.status(400).json({ message: 'Email already exists!' })
     }
-  }else{
-    res.status(403).json({ message: 'unauthorised access!' })
-  }
+
 })
 
 router.get('/:id',async function(req, res, next) {

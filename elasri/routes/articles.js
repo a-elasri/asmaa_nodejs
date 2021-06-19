@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const articlesRepo = require('../repositories/articles');
-
+//const { authCheck } = require('./')
 
 router.get('/', async function(req, res, next) {
   const  page = parseInt(req.query.page) || 1;
@@ -13,33 +13,33 @@ router.get('/', async function(req, res, next) {
 
 
 router.delete('/:id',async function(req,res,next){
-  const { role } = req.user;
-  if(role == "admin" || role == "author"){
-    const id = req.params.id
-    res.send(await articlesRepo.deleteArticle(id))
-  }else{
-    res.status(403).json({ message: 'unauthorised access!' })
-  }
+
+  const id = req.params.id
+  res.send(await articlesRepo.deleteArticle(id))
+
 })
 
-router.put('/',async function(req,res,next){
-  const { role } = req.user;
-  if(role == "admin" || role == "author"){
-    const article = req.body
-    res.send(await articlesRepo.updateArticle(article))
-  }else{
-    res.status(403).json({ message: 'unauthorised access!' })
-  }
+router.put('/', async function(req,res,next){
+  const article = req.body
+  res.send(await articlesRepo.updateArticle(article))
+ 
 })
+
+router.put('/', async function(req, res, next) {
+  var article = {};
+  article.user = req.user;
+  article.id = req.body.id;
+  article.title = req.body.title;
+  article.content = req.body.content;
+  article.published = req.body.published;
+  res.status(200).send(await articleRepo.updateArticle(article));
+});
 
 router.post('/',async function(req,res,next){
-  const { role } = req.user;
-  if(role == "admin" || role == "author"){
-    const article = req.body
-    res.send(await articlesRepo.addArticle(article))
-  }else{
-    res.status(403).json({ message: 'unauthorised access!' })
-  }
+
+  const article = req.body
+  res.send(await articlesRepo.addArticle(article))
+
 })
 
 router.get('/:id', async function(req, res, next) {

@@ -10,37 +10,28 @@ router.get('/', async function(req, res, next) {
 
 
 router.delete('/:id',async function(req,res,next){ 
-  const { role } = req.user;
-  if(role == "admin" || role == "author"){
-    const id = req.params.id
-    res.send(await tagsRepo.deleteTag(id))
-  }else{
-    res.status(403).json({ message: 'unauthorised access!' })
-  }
+  
+  const id = req.params.id
+  res.send(await tagsRepo.deleteTag(id))
+
 })
 
 router.put('/',async function(req,res,next){
-  const { role } = req.user;
-  if(role == "admin" || role == "author"){
-    const tag = req.body
-    res.send(await tagsRepo.updateTag(tag))
-  }else{
-    res.status(403).json({ message: 'unauthorised access!' })
-  }
+
+  const tag = req.body
+  res.send(await tagsRepo.updateTag(tag))
+
 })
 
 router.post('/',async function(req,res,next){
-  const { role } = req.user;
-  if(role == "admin" || role == "author"){
-    const tag = req.body
+
+  const tag = req.body
   res.send(await tagsRepo.addTag(tag))
-  }else{
-    res.status(403).json({ message: 'unauthorised access!' })
-  }
+ 
 })
 
 router.get('/:id', async function(req, res, next) {
     res.send(await tagsRepo.getTag(req.params.id))
 })
 
-module.exports = router;
+module.exports = router; 

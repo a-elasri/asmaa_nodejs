@@ -1,10 +1,10 @@
 let currentPage = 1
-let limit = 7
+let limit = 6
 let nbElements
 
 $("#updateBtn").hide()
-function showPaginatedUsers(){
-    fetch(`http://localhost:3000/users?page=${currentPage}&limit=${limit}`,{headers:headers()})
+ function showPaginatedUsers(){
+     fetch(`http://localhost:3000/users?page=${currentPage}&limit=${limit}`,{headers:headers()})
        .then(handleErrors)
         .then(data => {
             $("#usesData").html("");
@@ -57,14 +57,16 @@ function updateButtons(){
     }
 }
 
-function deleteUser(id){
-    clearMsgs()
-    fetch(`http://localhost:3000/users/${id}`,{method:"DELETE",headers:headers()})
+
+  function deleteUser(id){
+   clearMsgs()
+     fetch(`http://localhost:3000/users/${id}`,{method:"DELETE",headers:headers()})
     .then(handleErrors)
     .then(() => {
             showPaginatedUsers()
             showMsg(`User with id = ${id} deleted successfully!`,"success")
     })
+
 }
 
 const formData = () =>{
@@ -75,13 +77,13 @@ const formData = () =>{
     return {username,email,password,role}
 }
 
-function updateUser(event){
+ function updateUser(event){
     event.preventDefault()
     clearMsgs()
     const user = formData()
     const id = $("#userId").val()
     Object.assign(user,{id:id})
-    fetch(`http://localhost:3000/users/`,
+     fetch(`http://localhost:3000/users/`,
     {method:"PUT",
     body:JSON.stringify(user),
     headers:headers()})
@@ -92,11 +94,14 @@ function updateUser(event){
                             showMsg(`User with id = ${id} updated successfully!`,"success")
                     })
 }
-function addUser(event){
+  function addUser(event){
     event.preventDefault()
+
     clearMsgs()
     const user = formData()
-    fetch(`http://localhost:3000/users/`,
+//    var user={username:'asmaa',email:'asmaa@gmail.com',password:'1234',role:'Admin'}
+    console.log(user)
+     fetch(`http://localhost:3000/users/`,
     {method:"POST",
     body:JSON.stringify(user),
     headers:headers()}).then(handleErrors)

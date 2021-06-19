@@ -8,33 +8,24 @@ router.get('/', async function(req, res, next) {
 });
 
 router.delete('/:id',async function(req,res,next){
-  const { role } = req.user;
-  if(role == "admin" || role == "author"){
-    const id = req.params.id
-    res.send( await commentsRepo.deleteComment(id))
-  }else{
-    res.status(403).json({ message: 'unauthorised access!' })
-  }
+
+  const id = req.params.id
+  res.send( await commentsRepo.deleteComment(id))
+ 
 })
 
 router.put('/',async function(req,res,next){
-  const { role } = req.user;
-  if(role == "admin" || role == "author"){
-    const comment = req.body
-    res.send(await commentsRepo.updateComment(comment))
-  }else{
-    res.status(403).json({ message: 'unauthorised access!' })
-  }
+
+  const comment = req.body
+  res.send(await commentsRepo.updateComment(comment))
+
 })
 
 router.post('/',async function(req,res,next){
-  const { role } = req.user;
-  if(role == "admin" || role == "author"){
-    const comment = req.body
-    res.send(await commentsRepo.addComment(comment))
-  }else{
-    res.status(403).json({ message: 'unauthorised access!' })
-  }
+  
+  const comment = req.body
+  res.send(await commentsRepo.addComment(comment))
+
 })
 
 router.get('/:id', async function(req, res, next) {
